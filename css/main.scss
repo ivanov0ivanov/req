@@ -1,0 +1,494 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css?family=Ubuntu:300,400,500');
+@import url('https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700');
+
+$main-white: #FFFFFF;
+$main-whiteE5: #E5E5E5;
+$main-red: #ED1111;
+$color-grey: #A5A4A4;
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  border-radius: $radius;
+}
+
+@mixin box-sizing($box) {
+  -webkit-box-sizing: $box;
+  -moz-box-sizing: $box;
+  -ms-box-sizing: $box;
+  box-sizing: $box;
+}
+
+@mixin transition($seconds, $timing-function) {
+  -webkit-transition: $seconds $timing-function;
+  -moz-transition: $seconds $timing-function;
+  transition: $seconds $timing-function;
+}
+
+@mixin display($display, $justify, $align-items) {
+  display: -webkit-#{$display};
+  display: -ms-#{$display};
+  display: $display;
+
+  -webkit-box-pack: $justify;
+  -ms-flex-pack: $justify;
+  justify-content: $justify;
+
+  -webkit-box-align: $align-items;
+  -ms-flex-align: $align-items;
+  align-items: $align-items;
+}
+
+//==animation
+@mixin animation($name, $duration, $timing_function, $visibility) {
+  -webkit-animation-name: $name;
+  -webkit-animation-duration: $duration;
+  -webkit-animation-timing-function: $timing_function;
+
+  -moz-animation-name: $name;
+  -moz-animation-duration: $duration;
+  -moz-animation-timing-function: $timing_function;
+
+  animation-name: $name;
+  animation-duration: $duration;
+  animation-timing-function: $timing_function;
+  visibility: $visibility !important;
+}
+
+@mixin keyframe($name) {
+  @-webkit-keyframes #{$name} {
+    @content;
+  }
+
+  @-moz-keyframes #{$name} {
+    @content;
+  }
+
+  @keyframes #{$name} {
+    @content;
+  }
+}
+
+//==========
+%WH-100 {
+  width: 100%;
+  height: 100%;
+}
+
+%font-Ubuntu_light300 {
+  font-weight: 300;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+%font-Ubuntu_regular400 {
+  font-weight: 400;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+%font-Ubuntu_medium500 {
+  font-weight: 500;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+%font-Raleway_regular400 {
+  font-weight: 400;
+  font-family: 'Raleway', sans-serif;
+}
+
+%font-Raleway_medium500 {
+  font-weight: 400;
+  font-family: 'Raleway', sans-serif;
+}
+
+%flex-allCenter {
+  @include display(flex, center, center);
+}
+
+%flex-spaceBetween {
+  @include display(flex, space-between, inherit);
+}
+
+%border-1pxSolE5 {
+  border: 1px solid $main-whiteE5;
+}
+
+//------------------DEFAULT---------------------
+
+* {
+  margin: 0;
+  padding: 0;
+  @include box-sizing(border-box);
+  transition: 0.2s ease-out;
+}
+
+body {
+  @extend %WH-100;
+  background-color: #EFEEEE;
+}
+
+img {
+  margin: 0 auto;
+  display: inline-block;
+  pointer-events: none;
+}
+
+a {
+  cursor: pointer;
+  @include transition(0.2s, ease-out);
+}
+
+button {
+  cursor: pointer;
+}
+
+//---------------------------------------------
+.main-wrapper {
+  background-color: $main-white;
+  width: 1250px;
+  margin: 0 auto;
+}
+
+.wrapper-item {
+  margin: auto;
+
+  ul {
+    margin: 0 25px;
+
+    &:after {
+      display: table;
+      clear: both;
+      content: "";
+    }
+
+    li {
+      width: 270px;
+      height: 425px;
+      margin: 50px 15px 0 15px;
+      float: left;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      list-style-type: none;
+
+      .img-box {
+        width: 250px;
+        height: 250px;
+        margin: -20px auto 0 auto;
+        padding-top: 5px;
+        border: 1px solid #C4C4C4;
+        background-color: $main-white;
+        text-align: center;
+
+        img {
+          max-width: 100%;
+          height: auto;
+        }
+
+        .sale-container {
+          margin-top: -50%;
+          @extend %flex-spaceBetween;
+
+          .sale,
+          .new {
+            width: 70px;
+            height: 35px;
+            font-size: 13px;
+            @extend %font-Ubuntu_medium500;
+            color: $main-white;
+            @extend %flex-allCenter;
+            text-transform: uppercase;
+          }
+
+          .sale {
+            background-color: $main-red;
+          }
+
+          .new {
+            background-color: #000000;
+          }
+        }
+      }
+    }
+  }
+}
+
+.wrapper-description_card {
+  padding: 0 10px;
+
+  .title {
+    font-size: 14px;
+    @extend %font-Ubuntu_regular400;
+    color: #333333;
+    padding: 15px 0;
+  }
+
+  .description {
+    font-size: 11px;
+    @extend %font-Ubuntu_regular400;
+    color: $color-grey;
+  }
+
+  .cost-container {
+    display: flex;
+    padding: 20px 0;
+
+    .discountCost {
+      font-size: 25px;
+      @extend %font-Ubuntu_regular400;
+      margin-right: 25px;
+    }
+
+    .cost {
+      font-size: 17px;
+      @extend %font-Ubuntu_regular400;
+      color: $main-red;
+      @extend %flex-allCenter;
+      text-decoration: line-through;
+    }
+  }
+
+  .controls {
+    @extend %flex-spaceBetween;
+
+    .btn-add,
+    .btn-view {
+      width: 115px;
+      height: 35px;
+      @extend %border-1pxSolE5;
+      text-transform: uppercase;
+    }
+
+    .btn-add {
+      font-size: 13px;
+      @extend %font-Ubuntu_medium500;
+      color: $main-red;
+      background-color: $main-white;
+
+      &:hover {
+        background: #ED8E8E;
+      }
+    }
+
+    .btn-view {
+      font-size: 12px;
+      @extend %font-Ubuntu_light300;
+      color: #999E9F;
+      background-color: #D9D9D9;
+
+      &:hover {
+        background: darken(#D9D9D9, 10%);
+      }
+    }
+  }
+}
+
+.wrapper-load {
+  margin-top: 40px;
+  @extend %flex-allCenter;
+
+  .btn-load {
+    width: 115px;
+    height: 35px;
+    color: $main-red;
+    background-color: $main-white;
+    @extend %border-1pxSolE5;
+    text-transform: uppercase;
+
+    &:hover {
+      background: #ED8E8E;
+    }
+  }
+}
+
+.preloader {
+  display: none;
+  opacity: 0;
+  margin-top: 50px;
+  text-align: center;
+}
+
+//------------------FOOTER-----------------------
+footer {
+  margin-top: 70px;
+  padding-bottom: 90px;
+
+  ul {
+    margin: 0 25px;
+    text-align: left !important;
+
+    &:after {
+      display: table;
+      clear: both;
+      content: "";
+    }
+
+    li {
+      width: 370px;
+      font-size: 11px;
+      @extend %font-Ubuntu_light300;
+      color: #999E9F;
+      margin: 0 15px;
+      padding: 45px 25px 55px 25px;
+      float: left;
+      border-top: 1px solid $main-whiteE5;
+      border-bottom: 1px solid $main-whiteE5;
+      list-style-type: none;
+
+      h2 {
+        font-size: 20px;
+        @extend %font-Raleway_medium500;
+        color: #333333;
+        text-transform: uppercase;
+      }
+
+      .description-footer {
+        margin-top: 20px;
+      }
+    }
+  }
+}
+
+.wrapper-footer-list {
+  ul {
+    margin: 0 !important;
+    padding: 0 !important;
+
+    li {
+      border: 0;
+      margin: 0 !important;
+      padding: 20px 0 0 0 !important;
+      list-style-type: none;
+
+      &:before {
+        content: "► ";
+        color: #ed1111;
+      }
+    }
+  }
+}
+
+.wrapper-contacts {
+  ul {
+    width: 370px;
+    margin: 0 !important;
+    display: block;
+    list-style-type: none;
+
+    li {
+      margin-top: 30px;
+      margin-left: 0 !important;
+      padding: 0;
+      border: 0;
+
+      img {
+        margin: 0 5px 0 0;
+        vertical-align: middle;
+      }
+
+      a {
+        color: #999E9F;
+        text-decoration: none;
+      }
+
+      &:nth-child(1) {
+        margin-top: 22px;
+      }
+
+      &:nth-child(3) {
+        line-height: 0.8;
+      }
+    }
+  }
+}
+
+//------------------ANIMATION----------------------
+
+.fadeIn {
+  @include animation(fadeIn, 0.5s, ease-in-out, visible);
+}
+
+@include keyframe(fadeIn) {
+  0% {
+    transform: scale(0);
+    opacity: 0.0;
+  }
+  60% {
+    transform: scale(1.1);
+  }
+  80% {
+    transform: scale(0.9);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+//----------PRELOADER--------------
+
+//-------------MEDIA---------------
+
+@media all and (max-width: 1200px) {
+
+  .main-wrapper {
+    width: 950px;
+  }
+}
+
+@media all and (max-width: 950px) {
+
+  .main-wrapper {
+    width: 650px;
+  }
+}
+
+@media all and (max-width: 650px) {
+
+  .main-wrapper {
+    width: 350px;
+  }
+
+  footer {
+    ul {
+      margin: 0;
+
+      li {
+        width: 320px;
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+  }
+
+  .wrapper-contacts {
+    ul {
+      width: 320px;
+    }
+  }
+}
+
+@media all and (max-width: 350px) {
+
+  .main-wrapper {
+    width: 300px;
+
+    #elements {
+      margin: 0;
+    }
+  }
+
+  footer {
+    ul {
+      li {
+        width: 265px;
+      }
+    }
+  }
+
+  .wrapper-contacts {
+    ul {
+      width: 270px;
+    }
+  }
+}
